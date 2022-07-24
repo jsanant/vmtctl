@@ -1,0 +1,13 @@
+[app]
+num_account_ids = 2
+num_project_ids = ""
+
+[vminsert]
+url_scheme = "http"
+host = "vminsert"
+port = "8480"
+
+[vmselect]
+url_scheme = "http"
+host = "vmselect"
+port = "8481"

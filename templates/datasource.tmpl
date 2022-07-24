@@ -1,0 +1,10 @@
+apiVersion: 1
+
+datasources:
+{{- range . }}
+  - name: multi-tenant-{{ .AccountId }}
+    type: prometheus
+    access: proxy
+    url: {{ .PrometheusUrl }}
+    isDefault: false
+{{ end }}
