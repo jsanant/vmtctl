@@ -8,7 +8,7 @@ A CLI tool to generate [multi-tenant](https://docs.victoriametrics.com/Cluster-V
 
 ```
 $ ./bin/vmtctl -h
-      --config string   Path to the .toml config file (default "config.toml")
+      --config string   Path to the .toml config file (default "sample_config.toml")
       --gen-endpoints   Generate only endpoints
   -v, --version         Show version
 
