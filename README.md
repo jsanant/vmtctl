@@ -56,7 +56,7 @@ Default creds:
 
 # Clean up
 
-**NOTE:** This will remove all volumes, please make sure you do not have any existing volumes when running this command.
+**NOTE:** This will remove all volumes, please make sure you do not have any existing volumes before running this command.
 
 Once you are done with your testing, you can run `make clean`. This is will stop all containers and remove all the volumes that were generated.
 
