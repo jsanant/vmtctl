@@ -39,7 +39,7 @@ func initConfig() (*koanf.Koanf, error) {
 	}
 
 	// Define CLI flags
-	f.String("config", "config.toml", "Path to the .toml config file")
+	f.String("config", "sample_config.toml", "Path to the .toml config file")
 	f.Bool("gen-endpoints", false, "Generate only endpoints")
 	f.BoolP("version", "v", false, "Show version")
 
