@@ -1,10 +1,10 @@
 ## vmtctl
 
-A CLI to generate [multi-tenant](https://docs.victoriametrics.com/Cluster-VictoriaMetrics.html#multitenancy) URLs in victoria-metrics and run the clustered version locally.
-
-The tool helps in understanding on how to use the [multi-tenant URLs](https://docs.victoriametrics.com/Cluster-VictoriaMetrics.html#url-format) in clustered mode.
+A CLI tool to generate [multi-tenant](https://docs.victoriametrics.com/Cluster-VictoriaMetrics.html#multitenancy) URLs in victoria-metrics and run the clustered version locally. The tool helps in understanding on how to use the [multi-tenant URLs](https://docs.victoriametrics.com/Cluster-VictoriaMetrics.html#url-format) in clustered mode.
 
 ## Usage
+
+**Note:** Every time you run the binary new tenants are generated.
 
 ```
 $ ./bin/vmtctl -h
@@ -16,11 +16,11 @@ $ ./bin/vmtctl -h
 
 - Clone the repo
 - Edit the `sample-config.toml`
-- Run `make dev` to
+- Run `make dev`, which will
   - Build the binary
   - Generate the multi-tenant endpoints
-    - Populate grafana and vminsert endpoints in `datasource.yml` and `docker-compose.yml` respectively and bring up victoria-metrics clustered version
-- If you only want to generate the endpoints and not run the clustered version, you can run this command:
+  - Populate the vmselect and vminsert endpoints in `datasource.yml` and `docker-compose.yml` files respectively and bring up victoria-metrics clustered version
+- If you want to generate only the endpoints and not run victoria-metrics, you can run this command:
 
 ```
 ./bin/vmtctl --gen-endpoints
@@ -39,8 +39,6 @@ $ ./bin/vmtctl -h
 +-----------+------------+-----------+------------------------------------------------------+------------------------------------------------------+
 ```
 
-**Note** Every time you run the binary new tenants are generated.
-
 Once the cluster is up and running, you can use the tenant endpoints generated under the InfluxDB URL tab to send data.
 
 ```
@@ -49,7 +47,7 @@ curl -d 'measurement,tag1=value1,tag2=value2 field1=123,field2=1.23' -X POST 'ht
 
 More info how victoria-metrics translates data from [InfluxDB endpoints](https://docs.victoriametrics.com/#how-to-send-data-from-influxdb-compatible-agents-such-as-telegraf).
 
-After this is done, you can navigate to the grafana explore section using this [link](http://localhost:3000). You will see the metric present only for the tenant you have sent the data.
+After this is done, you can navigate to the grafana explore section using this [link](http://localhost:3000/explore). You will see the metric present only for the tenant for which you have sent the data.
 
 Default creds:
 
@@ -58,7 +56,7 @@ Default creds:
 
 # Clean up
 
-**NOTE:** This will remove any existing volumes generated previously, please make sure you do not have any existing when running this command.
+**NOTE:** This will remove all volumes, please make sure you do not have any existing volumes when running this command.
 
 Once you are done with your testing, you can run `make clean`. This is will stop all containers and remove all the volumes that were generated.
 
