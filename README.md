@@ -39,7 +39,7 @@ $ ./bin/vmtctl -h
 +-----------+------------+-----------+------------------------------------------------------+------------------------------------------------------+
 ```
 
-Once the cluster is up and running, you can use the tenant endpoints generated under the InfluxDB URL tab to send data.
+Once the cluster is up and running, you can use the tenant endpoints generated under the InfluxDB URL column to send data.
 
 ```
 curl -d 'measurement,tag1=value1,tag2=value2 field1=123,field2=1.23' -X POST 'http://0.0.0.0:8480/insert/283739781:0/influx/write'
