@@ -12,6 +12,9 @@ import (
 	"go.uber.org/zap"
 )
 
+// Inject version at build time
+var version string
+
 func initLogger() *zap.Logger {
 
 	logger, err := zap.NewProduction()
@@ -46,7 +49,7 @@ func initConfig() (*koanf.Koanf, error) {
 
 	// Print version and exit
 	if ok, _ := f.GetBool("version"); ok {
-		fmt.Println("version")
+		fmt.Println(version)
 		os.Exit(0)
 	}
 

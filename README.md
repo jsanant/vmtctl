@@ -15,7 +15,7 @@ $ ./bin/vmtctl -h
 ```
 
 - Clone the repo
-- Edit the `sample-config.toml`
+- Edit the `sample-config.toml` according to your requirements
 - Run `make dev`, which will
   - Build the binary
   - Generate the multi-tenant endpoints
