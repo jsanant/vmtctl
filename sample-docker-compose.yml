@@ -1,0 +1,66 @@
+version: '3.5'
+services:
+  vmagent:
+    container_name: vmagent
+    image: victoriametrics/vmagent
+    depends_on:
+      - "vminsert"
+    ports:
+      - 8429:8429
+    volumes:
+      - vmagentdata:/vmagentdata
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--promscrape.config=/etc/prometheus/prometheus.yml'
+      - '--remoteWrite.url=http://vminsert:8480/insert/0/prometheus/'
+    restart: always
+
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:9.0.3
+    depends_on:
+      - "vmselect"
+    ports:
+      - 3000:3000
+    restart: always
+    volumes:
+      - grafanadata:/var/lib/grafana
+      - ./provisioning/:/etc/grafana/provisioning/
+
+  vmstorage-1:
+    container_name: vmstorage-1
+    image: victoriametrics/vmstorage
+    ports:
+      - 8482
+      - 8400
+      - 8401
+    volumes:
+      - strgdata-1:/storage
+    command:
+      - '--storageDataPath=/storage'
+    restart: always
+  vminsert:
+    container_name: vminsert
+    image: victoriametrics/vminsert
+    depends_on:
+      - "vmstorage-1"
+    command:
+      - '--storageNode=vmstorage-1:8400'
+    ports:
+      - 8480:8480
+    restart: always
+  vmselect:
+    container_name: vmselect
+    image: victoriametrics/vmselect
+    depends_on:
+      - "vmstorage-1"
+    command:
+      - '--storageNode=vmstorage-1:8401'
+    ports:
+      - 8481:8481
+    restart: always
+
+volumes:
+  vmagentdata: {}
+  strgdata-1: {}
+  grafanadata: {}
