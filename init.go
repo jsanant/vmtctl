@@ -32,15 +32,18 @@ func initConfig() (*koanf.Koanf, error) {
 	var k = koanf.New("_")
 	f := flag.NewFlagSet("vmtctl", flag.ContinueOnError)
 
+	// Print CLI flags when -h is used
 	f.Usage = func() {
 		fmt.Println(f.FlagUsages())
 		os.Exit(0)
 	}
 
+	// Define CLI flags
 	f.String("config", "config.toml", "Path to the .toml config file")
-	f.Bool("gen-endpoints", false, "Generate only endpoints and show them on the terminal")
+	f.Bool("gen-endpoints", false, "Generate only endpoints")
 	f.BoolP("version", "v", false, "Show version")
 
+	// Parse the defined flags
 	err := f.Parse(os.Args[1:])
 	if err != nil {
 		fmt.Print("Failed to parse args")
