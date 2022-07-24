@@ -47,7 +47,7 @@ curl -d 'measurement,tag1=value1,tag2=value2 field1=123,field2=1.23' -X POST 'ht
 
 More info how victoria-metrics translates data from [InfluxDB endpoints](https://docs.victoriametrics.com/#how-to-send-data-from-influxdb-compatible-agents-such-as-telegraf).
 
-After this is done, you can navigate to the grafana explore section using this [link](http://localhost:3000/explore). You will see the metric present only for the tenant to which you have sent the data.
+After this is done, you can navigate to the grafana explore section using this [link](http://localhost:3000/explore). You will see that the metric is present only for the tenant to which you have sent the data.
 
 Default creds:
 
