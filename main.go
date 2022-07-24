@@ -44,42 +44,45 @@ func main() {
 	// Generate only endpoints and exit, no need to generate grafana datasource and docker-compose files
 	if !tctl.config.Bool("gen-endpoints") {
 
+		// vmselect endpoints for Grafana datasource file
 		ds := vmselectUrls
+
+		// vminsert endpoints for vminsert container in docker-compose file
 		dc := vminsertUrls
 
-		// Generate grafana datasource file by populating vmselect URLs
+		// Generate grafana datasource file
 		tctl.logger.Info("Generating grafana datasource file")
 
-		t1, err := template.ParseFiles("templates/datasource.tmpl")
+		datasourceTmpl, err := template.ParseFiles("templates/datasource.tmpl")
 		if err != nil {
 			tctl.logger.Error("Failed to parse datasource template", zap.Error(err))
 			os.Exit(1)
 		}
 
-		file, _ := os.Create("provisioning/datasources/datasource.yaml")
-		defer file.Close()
+		datasourceFile, _ := os.Create("provisioning/datasources/datasource.yaml")
+		defer datasourceFile.Close()
 
-		err = t1.Execute(file, ds)
+		err = datasourceTmpl.Execute(datasourceFile, ds)
 		if err != nil {
 			tctl.logger.Error("Failed to write to datasource file", zap.Error(err))
 			os.Exit(1)
 		}
 
-		// Generate docker compose file by populating vminsert URLs
+		// Generate docker compose file
 		tctl.logger.Info("Generating docker compose file")
 
-		t2, err := template.ParseFiles("templates/docker-compose.tmpl")
+		dockercomposeTmpl, err := template.ParseFiles("templates/docker-compose.tmpl")
 		if err != nil {
-			tctl.logger.Error("Failed to parse template", zap.Error(err))
+			tctl.logger.Error("Failed to parse docker-compose template", zap.Error(err))
 			os.Exit(1)
 		}
 
-		dockerCompose, _ := os.Create("docker-compose.yml")
-		defer dockerCompose.Close()
+		dockerComposeFile, _ := os.Create("docker-compose.yml")
+		defer dockerComposeFile.Close()
 
-		err = t2.Execute(dockerCompose, dc)
+		err = dockercomposeTmpl.Execute(dockerComposeFile, dc)
 		if err != nil {
-			tctl.logger.Error("Failed to write docker-compose file", zap.Error(err))
+			tctl.logger.Error("Failed to write to docker-compose file", zap.Error(err))
 			os.Exit(1)
 		}
 	}
