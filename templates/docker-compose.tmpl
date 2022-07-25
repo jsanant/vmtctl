@@ -47,7 +47,7 @@ services:
     depends_on:
       - "vmstorage"
     command:
-      - '--storageNode=vmstorage-1:8400'
+      - '--storageNode=vmstorage:8400'
     ports:
       - 8480:8480
     restart: always
