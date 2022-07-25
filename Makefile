@@ -1,7 +1,6 @@
 BIN := ./bin/vmtctl
 
-GIT_TAG := $(shell git describe --tags)
-VERSION := ${GIT_TAG}
+VERSION := "v0.1.0"
 
 DOCKER_COMPOSE_DOWN = (docker-compose down)
 DOCKER_REMOVE_VOLUMES = (docker volume rm `docker volume ls -q`)
