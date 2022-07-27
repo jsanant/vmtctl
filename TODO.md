@@ -1,2 +1,3 @@
+- [ ] Show APIs mentioned in the [examples page](https://docs.victoriametrics.com/url-examples.html) on terminal
 - [ ] Explore [multitenancy](https://docs.victoriametrics.com/vmagent.html#multitenancy) in vmagent
 - [ ] Store tenant details in RDS as an example, probably in [sqlite3](https://github.com/mattn/go-sqlite3) since it is light weight
