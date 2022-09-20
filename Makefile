@@ -1,7 +1,5 @@
 BIN := ./bin/vmtctl
 
-VERSION := "v0.1.0"
-
 DOCKER_COMPOSE_DOWN = (docker-compose down)
 DOCKER_REMOVE_VOLUMES = (docker volume rm `docker volume ls -q`)
 
@@ -9,7 +7,7 @@ DOCKER_REMOVE_VOLUMES = (docker volume rm `docker volume ls -q`)
 .PHONY: build
 build:
 	@echo "####### Building the binary #######"
-	go build -o ${BIN} -ldflags="-X 'main.version=${VERSION}'"  .
+	go build -o ${BIN}  .
 
 # Generate endpoints and bring up clustered victoria-metrics
 .PHONY: run

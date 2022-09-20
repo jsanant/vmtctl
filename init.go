@@ -12,9 +12,6 @@ import (
 	"go.uber.org/zap"
 )
 
-// Inject version at build time
-var version string
-
 func initLogger() *zap.Logger {
 
 	logger, err := zap.NewProduction()
@@ -41,19 +38,12 @@ func initConfig() (*koanf.Koanf, error) {
 	// Define CLI flags
 	f.String("config", "sample_config.toml", "Path to the .toml config file")
 	f.Bool("gen-endpoints", false, "Generate only endpoints")
-	f.BoolP("version", "v", false, "Show version")
 
 	// Parse the defined flags
 	err := f.Parse(os.Args[1:])
 	if err != nil {
 		fmt.Print("Failed to parse args")
 		os.Exit(1)
-	}
-
-	// Print version and exit
-	if ok, _ := f.GetBool("version"); ok {
-		fmt.Println(version)
-		os.Exit(0)
 	}
 
 	// Load the config file provided in the command line
