@@ -1,4 +1,4 @@
-- [ ] Show APIs mentioned in the [examples page](https://docs.victoriametrics.com/url-examples.html) on the terminal
+- [x] ~~Show APIs mentioned in the [examples page](https://docs.victoriametrics.com/url-examples.html) on the terminal~~
 - [x] Store data in csv file - Done
 - [x] ~~Explore [multitenancy](https://docs.victoriametrics.com/vmagent.html#multitenancy) in vmagent~~ - This is handled at scrape level.
 - [x] ~~Store tenant details in [sqlite3](https://github.com/mattn/go-sqlite3)~~ - Store data directly in a CSV file.

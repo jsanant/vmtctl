@@ -46,7 +46,9 @@ This will create a file called `vmtctl.csv`.
 +-----------+------------+-----------+------------------------------------------------------+------------------------------------------------------+
 ```
 
-Once the cluster is up and running, you can use the tenant endpoints generated under the InfluxDB URL column to send data.
+### Send metrics
+
+- Once the cluster is up and running, you can use the tenant endpoints generated under the InfluxDB URL column to send data.
 
 ```
 curl -d 'measurement,tag1=value1,tag2=value2 field1=123,field2=1.23' -X POST 'http://0.0.0.0:8480/insert/283739781:0/influx/write'
@@ -54,7 +56,13 @@ curl -d 'measurement,tag1=value1,tag2=value2 field1=123,field2=1.23' -X POST 'ht
 
 More info how victoria-metrics translates data from [InfluxDB endpoints](https://docs.victoriametrics.com/#how-to-send-data-from-influxdb-compatible-agents-such-as-telegraf).
 
-After this is done, you can navigate to the grafana explore section using this [link](http://localhost:3000/explore). You will see that the metric is present only for the tenant to which you have sent the data.
+- Sending metrics in Prometheus text exposition format
+
+```
+curl -d 'metric_name{foo="bar"} 123' -X POST http://vminsert:8480/insert/283739781:0/prometheus/api/v1/import/prometheus
+```
+
+- After this is done, you can navigate to the grafana explore section using this [link](http://localhost:3000/explore). You will see that the metric is present only for the tenant to which you have sent the data.
 
 Default creds:
 
