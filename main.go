@@ -41,6 +41,10 @@ func main() {
 
 	tctl.RenderToTerminal(vminsertUrls, vmselectUrls)
 
+	if tctl.config.Bool("csv") {
+		tctl.RenderToCsv(vminsertUrls, vmselectUrls)
+	}
+
 	// Generate only endpoints and exit, no need to generate grafana datasource and docker-compose files
 	if !tctl.config.Bool("gen-endpoints") {
 
