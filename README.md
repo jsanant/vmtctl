@@ -9,6 +9,7 @@ A CLI tool to generate [multi-tenant](https://docs.victoriametrics.com/Cluster-V
 ```
 $ ./bin/vmtctl -h
       --config string   Path to the .toml config file (default "sample_config.toml")
+      --csv             Create a CSV file with endpoints
       --gen-endpoints   Generate only endpoints
 
 ```
@@ -19,6 +20,13 @@ $ ./bin/vmtctl -h
   - Build the binary
   - Generate the multi-tenant endpoints
   - Populate the vmselect and vminsert endpoints in `datasource.yml` and `docker-compose.yml` files respectively and bring up victoria-metrics clustered version
+
+- To generate a CSV file with the endpoints, you can run this command:
+```
+./bin/vmtctl --csv
+```
+This will create a file called `vmtctl.csv`.
+
 - If you want to generate only the endpoints and not run victoria-metrics, you can run this command:
 
 ```
