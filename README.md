@@ -17,14 +17,17 @@ $ ./bin/vmtctl -h
 - Clone the repo
 - Edit the `sample_config.toml` according to your requirements
 - Run `make dev`, which will
+
   - Build the binary
   - Generate the multi-tenant endpoints
   - Populate the vmselect and vminsert endpoints in `datasource.yml` and `docker-compose.yml` files respectively and bring up victoria-metrics clustered version
 
 - To generate a CSV file with the endpoints, you can run this command:
+
 ```
 ./bin/vmtctl --csv
 ```
+
 This will create a file called `vmtctl.csv`.
 
 - If you want to generate only the endpoints and not run victoria-metrics, you can run this command:
@@ -59,7 +62,7 @@ More info how victoria-metrics translates data from [InfluxDB endpoints](https:/
 - Sending metrics in Prometheus text exposition format
 
 ```
-curl -d 'metric_name{foo="bar"} 123' -X POST http://vminsert:8480/insert/283739781:0/prometheus/api/v1/import/prometheus
+curl -d 'metric_name{foo="bar"} 123' -X POST http://0.0.0.0:8480/insert/283739781:0/prometheus/api/v1/import/prometheus
 ```
 
 - After this is done, you can navigate to the grafana explore section using this [link](http://localhost:3000/explore). You will see that the metric is present only for the tenant to which you have sent the data.
